@@ -33,19 +33,27 @@
 */
 
 const setValue = ($target, value) => {
-	if ($target === null) {
-		return false;
-	}
-
 	$target.innerHTML = value;
-	return true;
 }
 const getValueFromInput = ($inp) => {
 	return $inp.value;
 }
 
 const addNum = (a,b) => {
-	return a+b;
+	const numA = Number(a)
+	const numB = Number(b)
+
+	// if (isNaN(numA) || isNaN(numB)) {
+	// 	return 0;
+	// }
+
+	return numA+numB;
+}
+
+const update = () => {
+	const input = getValueFromInput($input);
+	total = addNum(input, total);
+	setValue($totalSpan, total);	
 }
 
 let total = 0;
@@ -53,7 +61,18 @@ const $totalSpan = document.querySelector('.js-total');
 const $add = document.querySelector('.js-add');
 const $input = document.querySelector('.js-input');
 
-$add.addEventListener('click', (e) => {
-	const input = getValueFromInput($input);
 
+$add.addEventListener('click', (e) => {
+	update();
 });
+
+$input.addEventListener('keypress', (FOOBAR) => {
+	if (FOOBAR.keyCode === 13) {
+		update();
+	}
+});
+
+
+
+
+
